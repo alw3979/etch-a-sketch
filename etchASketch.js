@@ -32,6 +32,7 @@ grid.classList.add('grid');
 container.appendChild(grid);
 
 const button = document.querySelector('button');
+createGrid()
 
 button.addEventListener('click', (event) => {
     while(grid.firstChild){
