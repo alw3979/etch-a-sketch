@@ -12,18 +12,35 @@ function onHover(item) {
     });
 }
 
+function createGrid(squaresAcross=4){
+
+    for (let i=0; i<squaresAcross * squaresAcross; i++) {
+        const gridElement=document.createElement('div');
+        gridElement.classList.add('gridElement');
+        gridElement.style.width= (800 / squaresAcross).toString() + 'px'
+        gridElement.style.height= (800 / squaresAcross).toString() + 'px'
+        gridElement.setAttribute('opacity', 0)
+        grid.appendChild(gridElement);
+    };
+
+    document.querySelectorAll('.gridElement').forEach(item =>onHover(item));
+}
 
 const container=document.querySelector('#container');
-
 const grid = document.createElement('div');
 grid.classList.add('grid');
 container.appendChild(grid);
 
-for (let i=0; i<16; i++) {
-    const gridElement=document.createElement('div');
-    gridElement.classList.add('gridElement');
-    gridElement.setAttribute('opacity', 0)
-    grid.appendChild(gridElement);
-};
+const button = document.querySelector('button');
 
-document.querySelectorAll('.gridElement').forEach(item =>onHover(item));
+button.addEventListener('click', (event) => {
+    while(grid.firstChild){
+        grid.removeChild(grid.firstChild)
+    }
+    let squares= prompt("Please enter the number of squares across: ");
+    if (squares > 100) {
+        squares= prompt("Please enter a number less than 100: ");
+    }
+    createGrid(squares);
+
+});
